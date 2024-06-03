@@ -1,15 +1,16 @@
 package br.com.acmepay.application.domain.models;
 
 import br.com.acmepay.application.domain.exception.BalanceTowithdrawException;
+import br.com.acmepay.application.ports.out.ICreateAccount;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
+@Builder
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -19,11 +20,10 @@ public class AccountDomain {
     private Integer agency;
     private BigDecimal balance; //SaldoConta
     private Boolean close;
-    private String customer;
     private LocalDateTime created_at;
     private LocalDateTime updated_at;
 
-    public void create() {
+    public void create(ICreateAccount createAccount) {
     }
 
     public void deposit(BigDecimal amount){ //Valor a ser depositado
