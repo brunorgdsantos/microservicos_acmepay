@@ -1,30 +1,33 @@
-package br.com.acmepay.application.domain.models;
+package br.com.acmepay.adapters.output.entity;
 
-import br.com.acmepay.application.domain.exception.CheckEmailDocumentException;
-import br.com.acmepay.application.ports.out.ICreateCustomer;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 @Builder
-@Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CustomerDomain {
+@Data
+@Entity
+@Table(name = "customers")
+public class CustomerEntity {
+
+    @Id
+    @SequenceGenerator(name = "customer_seq",
+            sequenceName = "customer_seq",
+            allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE,
+            generator = "customer_seq")
     private Long id;
+
     private String name;
     private String email;
     private String phone;
     private String document;
     private LocalDateTime created_at;
     private LocalDateTime updated_at;
-
-    public void create(ICreateCustomer createCustomer){
-
-    }
 }
