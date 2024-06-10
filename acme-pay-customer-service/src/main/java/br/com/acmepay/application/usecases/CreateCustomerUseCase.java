@@ -15,4 +15,5 @@ public class CreateCustomerUseCase implements ICreateCustomerUseCase {
     public void execute(CustomerDomain domain) {
         domain.create(createCustomer);
     }
+
 }

@@ -1,6 +1,8 @@
 package br.com.acmepay.application.domain.models;
 
+import br.com.acmepay.adapters.request.DocumentRequest;
 import br.com.acmepay.application.domain.exception.BalanceTowithdrawException;
+import br.com.acmepay.application.ports.out.ICheckDocumentCustomer;
 import br.com.acmepay.application.ports.out.ICreateAccount;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -22,8 +24,13 @@ public class AccountDomain {
     private Boolean close;
     private LocalDateTime created_at;
     private LocalDateTime updated_at;
+    private String customerDocument;
 
-    public void create(ICreateAccount createAccount) {
+    public void create(ICreateAccount createAccount, ICheckDocumentCustomer checkDocumentCustomer) {
+        var doc = DocumentRequest.builder().document(this.customerDocument).build();
+        checkDocumentCustomer.execute(doc);
+
+        createAccount.execute(this);
     }
 
     public void deposit(BigDecimal amount){ //Valor a ser depositado

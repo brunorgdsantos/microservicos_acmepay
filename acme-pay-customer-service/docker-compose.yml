@@ -9,6 +9,6 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_DB=customer-service
     volumes:
-      - "./data/accounts/postgres:/var/lib/postgres/data"
+      - "./data/customer/postgres:/var/lib/postgres/data"
     ports:
       - 5433:5432
