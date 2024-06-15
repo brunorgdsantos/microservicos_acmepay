@@ -1,0 +1,1 @@
+create sequence notifications_seq;
