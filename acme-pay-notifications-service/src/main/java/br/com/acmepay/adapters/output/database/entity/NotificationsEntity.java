@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @Entity
-@Table(name = "accounts")
+@Table(name = "notifications")
 public class NotificationsEntity {
 
         @Id
@@ -23,7 +23,7 @@ public class NotificationsEntity {
         private Long id;
 
         private String document;
-        private String Status;
+        private String status;
         private String create_doc;
         private String update_doc;
 }

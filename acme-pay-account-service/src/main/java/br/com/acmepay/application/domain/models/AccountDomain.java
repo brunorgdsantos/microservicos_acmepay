@@ -31,7 +31,7 @@ public class AccountDomain {
             throw new IllegalArgumentException("Invalid lenght of document");
         }else {
             var doc = DocumentRequest.builder().document(this.customerDocument).build();
-            checkDocumentCustomer.execute(doc);
+            checkDocumentCustomer.execute(String.valueOf(doc));
 
             createAccount.execute(this);
         }
