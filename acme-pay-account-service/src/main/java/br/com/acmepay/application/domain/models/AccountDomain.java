@@ -32,7 +32,7 @@ public class AccountDomain {
         }else {
             var doc = DocumentRequest.builder().document(this.customerDocument).build();
             checkDocumentCustomer.execute(String.valueOf(doc));
-
+            //NECESSARIO PEGAR O DOCUMENT VINDOS DA VILA SUCCESS OU FAIL DO NOTIFICATIONS
             createAccount.execute(this);
         }
     }
