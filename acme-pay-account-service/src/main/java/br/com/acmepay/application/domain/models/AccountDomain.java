@@ -27,10 +27,14 @@ public class AccountDomain {
     private String customerDocument;
 
     public void create(ICreateAccount createAccount, ICheckDocumentCustomer checkDocumentCustomer) {
-        var doc = DocumentRequest.builder().document(this.customerDocument).build();
-        checkDocumentCustomer.execute(doc);
-
-        createAccount.execute(this);
+        if(this.getCustomerDocument().length() > 11){
+            throw new IllegalArgumentException("Invalid lenght of document");
+        }else {
+            var doc = DocumentRequest.builder().document(this.customerDocument).build();
+            checkDocumentCustomer.execute(String.valueOf(doc));
+            //NECESSARIO PEGAR O DOCUMENT VINDOS DA VILA SUCCESS OU FAIL DO NOTIFICATIONS
+            createAccount.execute(this);
+        }
     }
 
     public void deposit(BigDecimal amount){ //Valor a ser depositado

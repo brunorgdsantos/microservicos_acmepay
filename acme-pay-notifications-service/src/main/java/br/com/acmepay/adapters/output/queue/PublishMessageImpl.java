@@ -1,6 +1,5 @@
 package br.com.acmepay.adapters.output.queue;
 
-import br.com.acmepay.adapters.request.DocumentRequest;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -15,8 +14,8 @@ public class PublishMessageImpl implements ProducerMessage{
 
     @Override
     public void publish(String documentRequest) {
-        log.info("Publishing : Payload {} / Queue {}", documentRequest, "queue_check_document");
-        this.rabbitTemplate.convertSendAndReceive("queue_check_document", documentRequest);
-        log.info("Published : Payload {} / Queue {}", documentRequest, "queue_check_document");
+        log.info("Publishing : Payload {} / Queue {}", documentRequest, "queue_success_document");
+        this.rabbitTemplate.convertSendAndReceive("queue_success_document", documentRequest);
+        log.info("Published : Payload {} / Queue {}", documentRequest, "queue_success_document");
     }
 }
