@@ -1,1 +1,1 @@
-alter table accounts add column document varchar (20);
+alter table accounts add column document varchar (40);

@@ -38,6 +38,7 @@ public class NotificationsDomain {
 
             var doc = NotificationsRequest.builder().document(notificationsEntity.get().getDocument()).build();
             checkDocumentNotifications.execute(String.valueOf(doc));
+            log.info("SUCCESS PROCESS.");
 
         }else{
             log.info("Error: Document is not active.");

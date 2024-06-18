@@ -27,7 +27,7 @@ public class AccountDomain {
     private String customerDocument;
 
     public void create(ICreateAccount createAccount, ICheckDocumentCustomer checkDocumentCustomer) {
-        if(this.getCustomerDocument().length() > 11){
+        if(this.getCustomerDocument().length() > 40){
             throw new IllegalArgumentException("Invalid lenght of document");
         }else {
             var doc = DocumentRequest.builder().document(this.customerDocument).build();

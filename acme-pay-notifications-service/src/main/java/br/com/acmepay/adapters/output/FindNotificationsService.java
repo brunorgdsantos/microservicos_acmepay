@@ -15,9 +15,6 @@ public class FindNotificationsService implements IFindNotifications {
     private final NotificationsRepository notificationsRepository;
     @Override
     public Optional<NotificationsEntity> find(String document) {
-        /*var entity = NotificationsEntity.builder()
-                .document(document)
-                .build();*/
-        return notificationsRepository.findByDocument(document);
+        return notificationsRepository.findByDocument(document); //E AO LONGO DAS CAMADAS ESTA CONTATENANDO EM: DocumentRequest(document=DocumentRequest(document=999))
     }
 }

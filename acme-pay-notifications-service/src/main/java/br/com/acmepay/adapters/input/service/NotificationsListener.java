@@ -12,6 +12,7 @@ public class NotificationsListener {
 
     @RabbitListener(queues = "queue_check_document")
     public void receiveMessage(String requestListener) {
-        notificationsListener.receiveMessage(requestListener);
+        notificationsListener.receiveMessage(requestListener); //TA VINDO UMA STRINDO DO TIPO: DocumentRequest(document=999)
+        //NÃO ESTA VINDO UMA STRING DO TIPO: 999 COMO DEVERIA
     }
 }
