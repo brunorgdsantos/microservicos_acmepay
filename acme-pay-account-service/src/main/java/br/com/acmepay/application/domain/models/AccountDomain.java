@@ -31,7 +31,8 @@ public class AccountDomain {
             throw new IllegalArgumentException("Invalid lenght of document");
         }else {
             var doc = DocumentRequest.builder().document(this.customerDocument).build();
-            checkDocumentCustomer.execute(String.valueOf(doc));
+            //checkDocumentCustomer.execute(String.valueOf(doc));
+            checkDocumentCustomer.execute(doc);
             //NECESSARIO PEGAR O DOCUMENT VINDOS DA VILA SUCCESS OU FAIL DO NOTIFICATIONS
             createAccount.execute(this);
         }

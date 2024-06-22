@@ -15,7 +15,7 @@ public class CheckDocumentCustomerService implements ICheckDocumentCustomer {
     private final ProducerMessage producerMessage;
 
     @Override
-    public void execute(String request) {
+    public void execute(DocumentRequest request) {
         producerMessage.publish(request);
         log.info("Publish successfully to payload {}" , request);
     }
