@@ -2,7 +2,7 @@ package br.com.acmepay.application.domain.models;
 
 import br.com.acmepay.adapters.input.api.request.NotificationsRequest;
 import br.com.acmepay.adapters.output.database.entity.NotificationsEntity;
-import br.com.acmepay.application.ports.out.ICheckDocumentNotifications;
+import br.com.acmepay.application.ports.out.ICheckDocumentSuccessOrFailNotifications;
 import br.com.acmepay.application.ports.out.ICreateNotifications;
 import br.com.acmepay.application.ports.out.IFindNotifications;
 import lombok.AllArgsConstructor;
@@ -30,18 +30,19 @@ public class NotificationsDomain {
 
     public void validatedDocument(IFindNotifications findNotifications,
                                                            String requestListener,
-                                                           ICheckDocumentNotifications checkDocumentNotifications) {
+                                                           ICheckDocumentSuccessOrFailNotifications checkDocumentSuccessOrFailNotifications) {
 
         Optional<NotificationsEntity> notificationsEntity = findNotifications.find(requestListener);
 
         if(notificationsEntity.isPresent() && notificationsEntity.get().getStatus().equals("ACTIVE")) {
 
             var doc = NotificationsRequest.builder().document(notificationsEntity.get().getDocument()).build();
-            checkDocumentNotifications.execute(String.valueOf(doc));
+            checkDocumentSuccessOrFailNotifications.executeSuccess(String.valueOf(doc));
             log.info("SUCCESS: DOCUMENT IS ACTIVE!");
 
         }else{
-            log.info("ERROR: DOCUMENT IS NOT ACTIVE.");
+            var doc = notificationsEntity.isPresent()? notificationsEntity.get().getDocument() : "ERROR: DOCUMENT IS NOT ACTIVE.";
+            checkDocumentSuccessOrFailNotifications.executeFail(String.valueOf(doc));
         }
     }
 

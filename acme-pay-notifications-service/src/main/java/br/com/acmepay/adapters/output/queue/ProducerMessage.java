@@ -1,5 +1,7 @@
 package br.com.acmepay.adapters.output.queue;
 
 public interface ProducerMessage {
-    void publish(String documentRequest);
+    void publishSuccess(String documentRequest);
+
+    void publishFail(String documentRequest);
 }
