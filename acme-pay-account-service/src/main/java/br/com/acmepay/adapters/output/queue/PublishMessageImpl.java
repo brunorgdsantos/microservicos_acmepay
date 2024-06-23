@@ -14,9 +14,9 @@ public class PublishMessageImpl implements ProducerMessage{
     private final RabbitTemplate rabbitTemplate;
 
     @Override
-    public void publish(String documentRequest) {
+    public void publish(DocumentRequest documentRequest) {
         log.info("Publishing : Payload {} / Queue {}", documentRequest, "queue_check_document");
-        this.rabbitTemplate.convertSendAndReceive("queue_check_document", documentRequest);
+        this.rabbitTemplate.convertSendAndReceive("queue_check_document", documentRequest.getDocument());
         log.info("Published : Payload {} / Queue {}", documentRequest, "queue_check_document");
     }
 }
