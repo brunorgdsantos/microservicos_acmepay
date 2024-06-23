@@ -2,6 +2,7 @@ package br.com.acmepay.application.domain.models;
 
 import br.com.acmepay.adapters.request.DocumentRequest;
 import br.com.acmepay.application.domain.exception.BalanceTowithdrawException;
+import br.com.acmepay.application.ports.in.IAccountListener;
 import br.com.acmepay.application.ports.out.ICheckDocumentCustomer;
 import br.com.acmepay.application.ports.out.ICreateAccount;
 import lombok.AllArgsConstructor;
@@ -30,12 +31,19 @@ public class AccountDomain {
         if(this.getCustomerDocument().length() > 40){
             throw new IllegalArgumentException("Invalid lenght of document");
         }else {
+
+
             var doc = DocumentRequest.builder().document(this.customerDocument).build();
-            //checkDocumentCustomer.execute(String.valueOf(doc));
             checkDocumentCustomer.execute(doc);
-            //NECESSARIO PEGAR O DOCUMENT VINDOS DA VILA SUCCESS OU FAIL DO NOTIFICATIONS
-            createAccount.execute(this);
+
+            //accountListener.receiveMessageSuccess(this.customerDocument); //RECEBENDO DO NOTIFICATIONS
+            //createAccount.execute(this);
         }
+    }
+
+    public void createAccount(String document, ICreateAccount createAccount) {
+        this.customerDocument = document;
+        createAccount.execute(this);
     }
 
     public void deposit(BigDecimal amount){ //Valor a ser depositado

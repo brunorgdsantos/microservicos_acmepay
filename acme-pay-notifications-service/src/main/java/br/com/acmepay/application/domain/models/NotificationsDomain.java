@@ -37,7 +37,7 @@ public class NotificationsDomain {
         if(notificationsEntity.isPresent() && notificationsEntity.get().getStatus().equals("ACTIVE")) {
 
             var doc = NotificationsRequest.builder().document(notificationsEntity.get().getDocument()).build();
-            checkDocumentSuccessOrFailNotifications.executeSuccess(String.valueOf(doc));
+            checkDocumentSuccessOrFailNotifications.executeSuccess(String.valueOf(doc.getDocument()));
             log.info("SUCCESS: DOCUMENT IS ACTIVE!");
 
         } else if (notificationsEntity.isPresent() && notificationsEntity.get().getStatus().equals("INACTIVE")) {
