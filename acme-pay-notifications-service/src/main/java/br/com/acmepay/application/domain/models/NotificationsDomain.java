@@ -40,7 +40,12 @@ public class NotificationsDomain {
             checkDocumentSuccessOrFailNotifications.executeSuccess(String.valueOf(doc));
             log.info("SUCCESS: DOCUMENT IS ACTIVE!");
 
-        }else{
+        } else if (notificationsEntity.isPresent() && notificationsEntity.get().getStatus().equals("INACTIVE")) {
+            var doc = NotificationsRequest.builder().document(notificationsEntity.get().getDocument()).build();
+            checkDocumentSuccessOrFailNotifications.executeFail(String.valueOf(doc));
+            log.info("WARNING: DOCUMENT EXISTS BUT IS NOT ACTIVE!");
+
+        } else{
             var doc = notificationsEntity.isPresent()? notificationsEntity.get().getDocument() : "ERROR: DOCUMENT IS NOT ACTIVE.";
             checkDocumentSuccessOrFailNotifications.executeFail(String.valueOf(doc));
         }
