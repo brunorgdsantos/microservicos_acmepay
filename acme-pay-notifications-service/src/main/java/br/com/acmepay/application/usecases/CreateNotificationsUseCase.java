@@ -1,5 +1,7 @@
 package br.com.acmepay.application.usecases;
 
+import br.com.acmepay.adapters.input.api.request.NotificationsRequest;
+import br.com.acmepay.adapters.request.DocumentRequest;
 import br.com.acmepay.application.domain.models.NotificationsDomain;
 import br.com.acmepay.application.ports.in.ICreateNotificationsUseCase;
 import br.com.acmepay.application.ports.in.INotificationsListener;
@@ -25,7 +27,8 @@ public class CreateNotificationsUseCase implements ICreateNotificationsUseCase, 
     }
 
     @Override
-    public void receiveMessage(String requestListener) {
-        NotificationsDomain.builder().build().validatedDocument(findNotifications, requestListener, checkDocumentNotifications);
+    public void receiveMessage(DocumentRequest documentRequestListener) {
+        NotificationsDomain.builder().build()
+                .validatedDocument(findNotifications, documentRequestListener, checkDocumentNotifications);
     }
 }

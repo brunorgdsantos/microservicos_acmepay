@@ -1,5 +1,8 @@
 package br.com.acmepay.application.usecases;
 
+import br.com.acmepay.adapters.input.api.request.AccountRequest;
+import br.com.acmepay.adapters.input.queue.AccountListener;
+import br.com.acmepay.adapters.request.DocumentRequest;
 import br.com.acmepay.application.domain.models.AccountDomain;
 import br.com.acmepay.application.ports.in.IAccountListener;
 import br.com.acmepay.application.ports.in.ICreateAccountUseCase;
@@ -18,12 +21,18 @@ public class CreateAccountUseCase implements ICreateAccountUseCase, IAccountList
 
     @Override
     public void execute(AccountDomain domain) {
-        domain.create(createAccount, checkDocumentCustomer);
+        domain.create(checkDocumentCustomer);
     }
 
     @Override
-    public void receiveMessageSuccess(String requestListener) {
-        AccountDomain.builder().build().createAccount(requestListener, createAccount);
+    public void receiveMessageSuccess(AccountRequest requestListener) {
+        AccountDomain.builder()
+                .number(requestListener.getNumber())
+                .agency(requestListener.getAgency())
+                .balance(requestListener.getBalance())
+                .customerDocument(requestListener.getDocument())
+                .build()
+                .createAccountReturn(createAccount);
     }
 
 }

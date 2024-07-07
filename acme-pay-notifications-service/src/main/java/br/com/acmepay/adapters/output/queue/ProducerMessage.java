@@ -1,7 +1,10 @@
 package br.com.acmepay.adapters.output.queue;
 
-public interface ProducerMessage {
-    void publishSuccess(String documentRequest);
+import br.com.acmepay.adapters.input.api.request.NotificationsRequest;
+import br.com.acmepay.adapters.request.DocumentRequest;
 
-    void publishFail(String documentRequest);
+public interface ProducerMessage {
+    void publishSuccess(DocumentRequest documentRequest);
+
+    void publishFail(DocumentRequest documentRequest);
 }

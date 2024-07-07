@@ -7,6 +7,8 @@ import br.com.acmepay.application.ports.out.ICreateAccount;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+
 @AllArgsConstructor
 @Service
 public class CreateAccountService implements ICreateAccount {
@@ -18,8 +20,8 @@ public class CreateAccountService implements ICreateAccount {
                     .agency(accountDomain.getAgency())
                     .number(accountDomain.getNumber())
                     .balance(accountDomain.getBalance())
-                    .created_at(accountDomain.getCreated_at())
-                    .updated_at(accountDomain.getUpdated_at())
+                    .created_at(LocalDateTime.now())
+                    .updated_at(LocalDateTime.now())
                     .document(accountDomain.getCustomerDocument())
                     .close(accountDomain.getClose())
             .build();

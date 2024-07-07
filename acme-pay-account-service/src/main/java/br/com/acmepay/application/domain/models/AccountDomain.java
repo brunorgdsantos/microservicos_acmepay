@@ -1,5 +1,7 @@
 package br.com.acmepay.application.domain.models;
 
+import br.com.acmepay.adapters.input.api.request.AccountRequest;
+import br.com.acmepay.adapters.input.queue.AccountListener;
 import br.com.acmepay.adapters.request.DocumentRequest;
 import br.com.acmepay.application.domain.exception.BalanceTowithdrawException;
 import br.com.acmepay.application.ports.in.IAccountListener;
@@ -27,22 +29,22 @@ public class AccountDomain {
     private LocalDateTime updated_at;
     private String customerDocument;
 
-    public void create(ICreateAccount createAccount, ICheckDocumentCustomer checkDocumentCustomer) {
+    public void create(ICheckDocumentCustomer checkDocumentCustomer) {
         if(this.getCustomerDocument().length() > 40){
             throw new IllegalArgumentException("Invalid lenght of document");
         }else {
 
-
-            var doc = DocumentRequest.builder().document(this.customerDocument).build();
-            checkDocumentCustomer.execute(doc);
-
-            //accountListener.receiveMessageSuccess(this.customerDocument); //RECEBENDO DO NOTIFICATIONS
-            //createAccount.execute(this);
+            var account = AccountRequest.builder()
+                    .number(this.number)
+                    .agency(this.agency)
+                    .balance(this.balance)
+                    .document(this.customerDocument)
+                    .build();
+            checkDocumentCustomer.execute(account);
         }
     }
 
-    public void createAccount(String document, ICreateAccount createAccount) {
-        this.customerDocument = document;
+    public void createAccountReturn(ICreateAccount createAccount) {
         createAccount.execute(this);
     }
 

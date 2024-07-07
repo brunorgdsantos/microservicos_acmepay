@@ -1,7 +1,10 @@
 package br.com.acmepay.application.ports.out;
 
-public interface ICheckDocumentSuccessOrFailNotifications {
-    void executeSuccess(String request);
+import br.com.acmepay.adapters.input.api.request.NotificationsRequest;
+import br.com.acmepay.adapters.request.DocumentRequest;
 
-    void executeFail(String request);
+public interface ICheckDocumentSuccessOrFailNotifications {
+    void executeSuccess(DocumentRequest request);
+
+    void executeFail(DocumentRequest request);
 }

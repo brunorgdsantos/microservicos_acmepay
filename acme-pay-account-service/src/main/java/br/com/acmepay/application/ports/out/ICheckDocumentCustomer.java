@@ -1,7 +1,8 @@
 package br.com.acmepay.application.ports.out;
 
+import br.com.acmepay.adapters.input.api.request.AccountRequest;
 import br.com.acmepay.adapters.request.DocumentRequest;
 
 public interface ICheckDocumentCustomer {
-    void execute(DocumentRequest request);
+    void execute(AccountRequest request);
 }

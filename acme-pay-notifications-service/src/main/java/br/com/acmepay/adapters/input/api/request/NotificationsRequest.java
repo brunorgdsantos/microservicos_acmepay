@@ -12,7 +12,6 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @Builder
 public class NotificationsRequest {
-
     private String document;
     private String status;
     private String create_doc;

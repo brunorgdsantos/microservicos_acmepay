@@ -1,5 +1,6 @@
 package br.com.acmepay.adapters.output.queue.service;
 
+import br.com.acmepay.adapters.input.api.request.AccountRequest;
 import br.com.acmepay.adapters.output.queue.ProducerMessage;
 import br.com.acmepay.adapters.request.DocumentRequest;
 import br.com.acmepay.application.ports.out.ICheckDocumentCustomer;
@@ -15,7 +16,7 @@ public class CheckDocumentCustomerService implements ICheckDocumentCustomer {
     private final ProducerMessage producerMessage;
 
     @Override
-    public void execute(DocumentRequest request) {
+    public void execute(AccountRequest request) {
         producerMessage.publish(request);
         log.info("Publish successfully to payload {}" , request);
     }
