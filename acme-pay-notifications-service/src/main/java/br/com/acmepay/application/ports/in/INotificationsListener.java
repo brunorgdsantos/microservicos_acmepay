@@ -6,4 +6,6 @@ import br.com.acmepay.adapters.request.DocumentRequest;
 public interface INotificationsListener {
 
     public void receiveMessage(DocumentRequest documentRequestListener);
+
+    public void receiveMessageKafka(DocumentRequest documentRequestListener);
 }

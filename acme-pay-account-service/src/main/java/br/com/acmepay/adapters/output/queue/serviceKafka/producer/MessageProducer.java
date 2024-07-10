@@ -1,27 +1,26 @@
-package br.com.acmepay.adapters.output.queue;
+package br.com.acmepay.adapters.output.queue.serviceKafka.producer;
 
 import br.com.acmepay.adapters.input.api.request.AccountRequest;
-import br.com.acmepay.adapters.request.DocumentRequest;
+import br.com.acmepay.adapters.output.queue.ProducerMessageKafka;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
+import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.stereotype.Component;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.amqp.rabbit.core.RabbitTemplate;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
-@Service
+@Component
 @AllArgsConstructor
 @Slf4j
-public class PublishMessageImpl implements ProducerMessage{
+public class MessageProducer implements ProducerMessageKafka {
 
-    private final RabbitTemplate rabbitTemplate;
-    
+    private final KafkaTemplate<String, String> template;
+
     @Override
-    public void publish(AccountRequest request) {
+    public void publish(AccountRequest request) { //FLUXO UTILIZANDO O KAFKA
         try{
             ObjectMapper objectMapper = new ObjectMapper();
             log.info("Publishing : Payload {} / Queue {}", request, "queue_check_document");
-            this.rabbitTemplate.convertSendAndReceive("queue_check_document", objectMapper.writeValueAsString(request));
+            this.template.send("topic1", objectMapper.writeValueAsString(request));
             log.info("Published : Payload {} / Queue {}", request, "queue_check_document");
         }catch (Exception e){
             e.printStackTrace();

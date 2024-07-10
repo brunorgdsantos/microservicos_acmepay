@@ -40,7 +40,8 @@ public class AccountDomain {
                     .balance(this.balance)
                     .document(this.customerDocument)
                     .build();
-            checkDocumentCustomer.execute(account);
+            //checkDocumentCustomer.execute(account); //FLUXO UTILIZANDO O RABBITMQ
+            checkDocumentCustomer.executeKafka(account); //FLUXO UTILIZANDO O KAFKA
         }
     }
 

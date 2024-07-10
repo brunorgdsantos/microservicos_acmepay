@@ -6,6 +6,7 @@ import br.com.acmepay.application.ports.in.IAccountListener;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 
 import java.io.DataInput;
@@ -16,7 +17,8 @@ public class AccountListener {
     @Autowired
     private IAccountListener accountListener;
 
-    @RabbitListener(queues = "queue_success_document")
+    //@RabbitListener(queues = "queue_success_document")
+    @KafkaListener(topics = "topic1", groupId = "grupoTopic1")
     public void receiveMessage(String requestListener) {
         try {
             ObjectMapper objectMapper = new ObjectMapper();

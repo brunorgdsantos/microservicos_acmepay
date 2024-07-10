@@ -31,4 +31,10 @@ public class CreateNotificationsUseCase implements ICreateNotificationsUseCase, 
         NotificationsDomain.builder().build()
                 .validatedDocument(findNotifications, documentRequestListener, checkDocumentNotifications);
     }
+
+    @Override
+    public void receiveMessageKafka(DocumentRequest documentRequestListener) {
+        NotificationsDomain.builder().build()
+                .validatedDocument(findNotifications, documentRequestListener, checkDocumentNotifications);
+    }
 }

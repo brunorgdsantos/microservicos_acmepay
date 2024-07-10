@@ -5,4 +5,6 @@ import br.com.acmepay.adapters.request.DocumentRequest;
 
 public interface ICheckDocumentCustomer {
     void execute(AccountRequest request);
+
+    void executeKafka(AccountRequest request);
 }
