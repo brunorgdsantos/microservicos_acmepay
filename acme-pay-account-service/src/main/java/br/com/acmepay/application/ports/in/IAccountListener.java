@@ -5,6 +5,5 @@ import br.com.acmepay.adapters.input.queue.AccountListener;
 import br.com.acmepay.adapters.request.DocumentRequest;
 
 public interface IAccountListener {
-
     public void receiveMessageSuccess(AccountRequest requestListener);
 }

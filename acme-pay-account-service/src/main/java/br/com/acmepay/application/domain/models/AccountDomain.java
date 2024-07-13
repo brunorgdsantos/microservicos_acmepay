@@ -29,7 +29,7 @@ public class AccountDomain {
     private LocalDateTime updated_at;
     private String customerDocument;
 
-    public void create(ICheckDocumentCustomer checkDocumentCustomer) {
+    public void create(ICheckDocumentCustomer checkDocumentCustomer) { //FLUXO CRIA CONTAS
         if(this.getCustomerDocument().length() > 40){
             throw new IllegalArgumentException("Invalid lenght of document");
         }else {

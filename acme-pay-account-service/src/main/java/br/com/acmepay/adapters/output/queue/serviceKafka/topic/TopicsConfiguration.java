@@ -10,7 +10,7 @@ import org.springframework.kafka.config.TopicBuilder;
 public class TopicsConfiguration {
     @Bean
     public NewTopic topic1() {
-        return TopicBuilder.name("topic1")
+        return TopicBuilder.name("transactions")
                 .partitions(10)
                 .replicas(1)
                 .build();

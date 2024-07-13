@@ -31,4 +31,9 @@ public class AccountController implements IAccountResourceAPI {
                 .message("account created!")
                 .build();
     }
+
+    @Override
+    public AccountResponse deposit(AccountRequest request) {
+        return null;
+    }
 }

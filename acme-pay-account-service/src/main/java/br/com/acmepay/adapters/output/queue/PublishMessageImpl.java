@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 public class PublishMessageImpl implements ProducerMessage{
 
     private final RabbitTemplate rabbitTemplate;
-    
+
     @Override
     public void publish(AccountRequest request) {
         try{

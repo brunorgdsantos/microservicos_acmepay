@@ -19,9 +19,10 @@ public class MessageProducer implements ProducerMessageKafka {
     public void publish(AccountRequest request) { //FLUXO UTILIZANDO O KAFKA
         try{
             ObjectMapper objectMapper = new ObjectMapper();
-            log.info("Publishing : Payload {} / Queue {}", request, "queue_check_document");
+            log.info("Publishing : Payload {}", request);
             this.template.send("topic1", objectMapper.writeValueAsString(request));
-            log.info("Published : Payload {} / Queue {}", request, "queue_check_document");
+            this.template.send("transactions", objectMapper.writeValueAsString(request));
+            log.info("Published : Payload {} ", request);
         }catch (Exception e){
             e.printStackTrace();
         }

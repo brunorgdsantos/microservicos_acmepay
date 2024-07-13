@@ -4,6 +4,7 @@ import br.com.acmepay.adapters.input.api.request.AccountRequest;
 import br.com.acmepay.adapters.input.queue.AccountListener;
 import br.com.acmepay.adapters.request.DocumentRequest;
 import br.com.acmepay.application.domain.models.AccountDomain;
+import br.com.acmepay.application.domain.models.Transactions;
 import br.com.acmepay.application.ports.in.IAccountListener;
 import br.com.acmepay.application.ports.in.ICreateAccountUseCase;
 import br.com.acmepay.application.ports.out.ICheckDocumentCustomer;

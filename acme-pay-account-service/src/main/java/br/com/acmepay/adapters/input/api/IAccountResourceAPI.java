@@ -13,4 +13,8 @@ public interface IAccountResourceAPI {
         @ResponseStatus(HttpStatus.CREATED)
         @PostMapping
         AccountResponse create(@RequestBody AccountRequest request);
+
+        @ResponseStatus(HttpStatus.CREATED)
+        @PostMapping("/deposit")
+        AccountResponse deposit(@RequestBody AccountRequest request);
 }
